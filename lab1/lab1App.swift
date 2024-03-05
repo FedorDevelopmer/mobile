@@ -63,6 +63,9 @@ struct lab1App: App {
                 let array = Array<SSD>()
                 ItemsView(ssdArray: array).environmentObject(appPage)
                 .environmentObject(auth)
+            case PageEnum.DESC:
+                SSDProfile().environmentObject(appPage)
+                    .environmentObject(auth)
             default:
                 ContentView().environmentObject(appPage)
                 .environmentObject(auth)

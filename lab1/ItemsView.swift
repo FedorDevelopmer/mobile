@@ -21,7 +21,9 @@ struct ItemsView : View {
             }
         }
         List(ssdArray){ item in
-            Text(String(item.getModel()))
+            Item(item:item).onTapGesture {
+                appPage.page = PageEnum.DESC
+            }
         }
         Text("Hugo").padding()
         Button(action:{
@@ -36,9 +38,10 @@ struct Item : View{
     var element: SSD
     
     var body: some View{
-        
+        VStack{
             Text(verbatim: String(element.getModel()))
             Text(verbatim: String(element.getPrice()))
+        }
     }
     
     public init(item:SSD){

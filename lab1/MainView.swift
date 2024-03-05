@@ -15,7 +15,6 @@ struct PageView : View {
         Text("Hugo").padding()
         Button(action:{
             //appPage.page = PageEnum.AUTH
-            Dat().addTestData()
         },label: {Text("Back")})
     }
 }
