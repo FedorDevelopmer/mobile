@@ -66,6 +66,12 @@ struct lab1App: App {
             case PageEnum.DESC:
                 SSDProfile().environmentObject(appPage)
                     .environmentObject(auth)
+            case PageEnum.PROFILE:
+                UserProfile().environmentObject(appPage)
+                    .environmentObject(auth)
+            case PageEnum.FEATURED:
+                FeaturedItemsView().environmentObject(appPage)
+                    .environmentObject(auth)
             default:
                 ContentView().environmentObject(appPage)
                 .environmentObject(auth)

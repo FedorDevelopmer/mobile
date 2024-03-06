@@ -10,9 +10,11 @@ import Firebase
 import FirebaseFirestore
 
 
-class SSD: Identifiable{
+class SSD : Hashable{
+   
+    
     private static let db = Firestore.firestore()
-    var id = UUID()
+    private var id:String = ""
     private var model:String = ""
     private var memory:Int = 0
     private var writeSpeed:Int = 0
@@ -34,8 +36,12 @@ class SSD: Identifiable{
     public func getPrice()->Int{
         return self.price
     }
-    public func getId()->UUID{
+    public func getId()->String{
         return self.id
+    }
+    
+    public func setId(id:String)->Void{
+        self.id = id
     }
     
     public func setModel(model:String)->Void{
@@ -66,25 +72,26 @@ class SSD: Identifiable{
             }
             for document in snapshot.documents{
                 let ssd = SSD()
+                ssd.setId(id:document.documentID)
                 let data = document.data()
                 if let value = data["model"] as? String{
-                    print("Model: \(value)")
+                    //print("Model: \(value)")
                     ssd.setModel(model: value)
                 }
                 if let value = data["memory"] as? Int {
-                    print("Memory: \(value)")
+                    //print("Memory: \(value)")
                     ssd.setMemory(memory: value)
                 }
                 if let value = data["writeSpeed"] as? Int {
-                    print("Write Speed: \(value)")
+                    //print("Write Speed: \(value)")
                     ssd.setWriteSpeed(writeSpeed:value)
                 }
                 if let value = data["readSpeed"] as? Int{
-                    print("Read Speed: \(value)")
+                    //print("Read Speed: \(value)")
                     ssd.setReadSpeed(readSpeed:value)
                 }
                 if let value = data["price"] as? Int{
-                    print("Price: \(value)")
+                    //print("Price: \(value)")
                     ssd.setPrice(price:value)
                 }
                 array.append(ssd)
@@ -92,5 +99,26 @@ class SSD: Identifiable{
             }
             completion(array)
         }
+    }
+    
+    static func == (lhs: SSD, rhs: SSD) -> Bool {
+        var equal:Bool = true
+        equal = equal && lhs.getId() == rhs.getId()
+        equal = equal && lhs.getModel() == rhs.getModel()
+        equal = equal && lhs.getPrice() == rhs.getPrice()
+        equal = equal && lhs.getMemory() == rhs.getMemory()
+        equal = equal && lhs.getReadSpeed() == rhs.getReadSpeed()
+        equal = equal && lhs.getWriteSpeed() == rhs.getWriteSpeed()
+        return equal
+    }
+    
+    
+    func hash(into hasher: inout Hasher){
+        hasher.combine(id)
+        hasher.combine(model)
+        hasher.combine(writeSpeed)
+        hasher.combine(readSpeed)
+        hasher.combine(memory)
+        hasher.combine(price)
     }
 }

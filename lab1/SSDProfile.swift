@@ -14,7 +14,6 @@ struct SSDProfile : View {
     @EnvironmentObject var appPage: PageState
     @EnvironmentObject var auth: AuthState
     @State var arrayOfImages = Array<UIImage>()
-    //public let timer = Timer.publish(every: 3, on: .main, in: .commonModes).autoconnect()
     @State private var selection = 0
     
     var body : some View {
@@ -23,15 +22,17 @@ struct SSDProfile : View {
         }
         VStack{
             TabView(selection:$selection){
-                    if(arrayOfImages.count == 0){
-                        Text("No images loaded yet")
+                    if(arrayOfImages.count == 0){
+                        Image(systemName: "xmark.icloud.fill")
+                        .resizable()
+                        .scaledToFit()
                     } else {
                        
                         ForEach(arrayOfImages,id:\.self){ item in
                             if let curr = item {
                                 Image(uiImage: curr)
                                     .resizable()
-                                    .scaledToFill()
+                                    .scaledToFit()
                             }
                         }
                     }
