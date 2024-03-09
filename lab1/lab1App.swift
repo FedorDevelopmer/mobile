@@ -10,8 +10,6 @@ import FirebaseCore
 
 
 enum PageEnum {
-    case MAIN
-    case AUTH
     case SIGNIN
     case DESC
     case FEATURED
@@ -38,7 +36,7 @@ class AuthState: ObservableObject {
 
 @main
 struct lab1App: App {
-    @ObservedObject var appPage = PageState(page: PageEnum.AUTH)
+    @ObservedObject var appPage = PageState(page: PageEnum.SIGNIN)
     @ObservedObject var auth = AuthState(authorized: false)
     init() {
         FirebaseApp.configure()
@@ -47,17 +45,11 @@ struct lab1App: App {
     var body: some Scene {
         WindowGroup {
             switch(appPage.page){
-            case PageEnum.AUTH:
-                ContentView().environmentObject(appPage)
-                .environmentObject(auth)
-            case PageEnum.MAIN:
-                PageView().environmentObject(appPage)
-                .environmentObject(auth)
             case PageEnum.SIGNIN:
-                SignInView(login:"",password: "").environmentObject(appPage)
+                SignInView(email:"",password: "").environmentObject(appPage)
                 .environmentObject(auth)
             case PageEnum.SIGNUP:
-                SignUpView(login:"",password: "").environmentObject(appPage)
+                SignUpView(email:"",password: "").environmentObject(appPage)
                 .environmentObject(auth)
             case PageEnum.ITEMS:
                 let array = Array<SSD>()
@@ -73,7 +65,7 @@ struct lab1App: App {
                 FeaturedItemsView().environmentObject(appPage)
                     .environmentObject(auth)
             default:
-                ContentView().environmentObject(appPage)
+                SignInView(email:"",password:"").environmentObject(appPage)
                 .environmentObject(auth)
             }
         }

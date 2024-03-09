@@ -16,11 +16,14 @@ struct FeaturedItemsView : View {
     @State private var ssdArray : Array<SSD> = Array<SSD>()
     
     var body: some View {
-        Text("Header").padding().onAppear{
+        Text("Your Featured").padding().onAppear{
             getFeaturedFromDB()
         }
+        GeometryReader{geometry in
         List(ssdArray,id:\.self){ item in
-            Item(item:item,page:appPage)
+            FeaturedItem(item:item,page:appPage)
+        }
+        .frame(height:geometry.size.height * 0.9)
         }
         .overlay(HStack{
             Spacer()
@@ -129,4 +132,37 @@ struct FeaturedItemsView : View {
             }
         })
     }
+}
+
+struct FeaturedItem : View{
+    var element: SSD
+    var appPage: PageState
+    @State private var isExisting:Bool = false
+    var body: some View{
+        HStack{
+            Image(systemName: "externaldrive")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 40, height: 40)
+                .onTapGesture {
+                    appPage.page = PageEnum.DESC
+                }
+            VStack{
+                Text(verbatim: "SSD Disk " + String(element.getModel()))
+                Text(verbatim: String(element.getPrice()) + "$")
+                    .foregroundColor(.red)
+            }.frame(alignment: .leading)
+            .onTapGesture {
+                appPage.page = PageEnum.DESC
+                SSDProfile.setCurrentSSD(ssd:element)
+            }
+        }
+        .frame(height:50,alignment: .leading)
+    }
+    
+    public init(item:SSD,page:PageState){
+        self.element = item
+        self.appPage = page
+    }
+    
 }

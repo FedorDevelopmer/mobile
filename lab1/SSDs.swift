@@ -20,6 +20,7 @@ class SSD : Hashable{
     private var writeSpeed:Int = 0
     private var readSpeed:Int = 0
     private var price:Int = 0
+    private var imagePath:String = ""
     
     public func getModel()->String{
         return self.model
@@ -40,6 +41,10 @@ class SSD : Hashable{
         return self.id
     }
     
+    public func getImagePath()->String{
+        return self.imagePath
+    }
+    
     public func setId(id:String)->Void{
         self.id = id
     }
@@ -58,6 +63,10 @@ class SSD : Hashable{
     }
     public func setPrice(price:Int)->Void{
         self.price = price
+    }
+    
+    public func setImagePath(imagePath:String)->Void{
+        self.imagePath = imagePath
     }
     
     public static func getItemsFromDB(completion:@escaping(Array<SSD>)->Void){
@@ -94,6 +103,10 @@ class SSD : Hashable{
                     //print("Price: \(value)")
                     ssd.setPrice(price:value)
                 }
+                if let value = data["imagePath"] as? String{
+                    //print("Price: \(value)")
+                    ssd.setImagePath(imagePath: value)
+                }
                 array.append(ssd)
                 
             }
@@ -109,6 +122,7 @@ class SSD : Hashable{
         equal = equal && lhs.getMemory() == rhs.getMemory()
         equal = equal && lhs.getReadSpeed() == rhs.getReadSpeed()
         equal = equal && lhs.getWriteSpeed() == rhs.getWriteSpeed()
+        equal = equal && lhs.getImagePath() == rhs.getImagePath()
         return equal
     }
     
@@ -120,5 +134,7 @@ class SSD : Hashable{
         hasher.combine(readSpeed)
         hasher.combine(memory)
         hasher.combine(price)
+        hasher.combine(imagePath)
     }
+    
 }

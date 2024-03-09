@@ -18,14 +18,21 @@ struct ItemsView : View {
     
     
     var body : some View {
-        Text("Header").padding().onAppear{
+        
+        Text("Catalog").padding().onAppear{
+            if !auth.authorized{
+                appPage.page = PageEnum.SIGNIN
+            }
             SSD.getItemsFromDB(){(array) in
                 ssdArray = array
             }
         }
+        GeometryReader{geometry in
         List(ssdArray,id:\.self){ item in
             Item(item:item,page:appPage)
+        }.frame(height:geometry.size.height * 0.9)
         }
+        
         .overlay(HStack{
             Spacer()
             Button(action: {appPage.page = PageEnum.PROFILE}, label: {
@@ -64,10 +71,11 @@ struct ItemsView : View {
             .frame(height:50)
             Spacer()
         }, alignment: .bottom)
+        }
     }
     
     
-}
+
 
 struct Item : View{
     var element: SSD
@@ -92,6 +100,7 @@ struct Item : View{
             }
             .onTapGesture {
                 appPage.page = PageEnum.DESC
+                SSDProfile.setCurrentSSD(ssd:element)
             }
             Spacer()
             Button(action: {
@@ -218,7 +227,6 @@ struct Item : View{
                 }
             }
             isExisting = false
-            
         })
     }
 }
