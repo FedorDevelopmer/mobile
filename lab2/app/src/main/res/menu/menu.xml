@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/profile"
+        android:title="@string/profile_menu_item"
+        android:tint="@color/sea_blue"
+        android:icon="@drawable/account_icon"/>
+    <item android:id="@+id/items"
+        android:tint="@color/sea_blue"
+        android:title="@string/items_menu_item"
+        android:icon="@drawable/list_icon"/>
+    <item android:id="@+id/featured"
+        android:title="@string/featured_menu_item"
+        android:tint="@color/sea_blue"
+        android:icon="@drawable/star_icon"/>
+</menu>

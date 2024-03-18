@@ -1,0 +1,37 @@
+<resources>
+    <!-- Main app definitions -->
+    <string name="app_name">SSDs</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="sign_in">Sign In</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="default_text">TextDefault</string>
+    <string name="no_account_sign_up">Don\'t have account? Sign up</string>
+    <string name="already_account_sign_in">Already have an account? Sign in</string>
+    <!-- SSD Description Page -->
+    <string name="one_click_buy">Buy in one click</string>
+    <string name="to_featured">Add to Featured</string>
+    <string name="model_label">Model:</string>
+    <string name="price_label">Price:</string>
+    <string name="read_speed_label">Read Speed:</string>
+    <string name="write_speed_label">Write Speed:</string>
+    <string name="memory_label">Memory:</string>
+    <!-- Menu items -->
+    <string name="profile_menu_item">Profile</string>
+    <string name="items_menu_item">Items</string>
+    <string name="featured_menu_item">Featured</string>
+    <!-- Profile Page -->
+    <string name="name_field">Name</string>
+    <string name="lastname_field">Lastname</string>
+    <string name="age_field">Age</string>
+    <string name="country_field">Country</string>
+    <string name="sex_field">Sex</string>
+    <string name="city_field">City</string>
+    <string name="phone_field">Phone Number</string>
+    <string name="address_field">Address</string>
+    <string name="mail_field">Postal Code</string>
+    <string name="edit">Edit</string>
+    <string name="log_out">Log Out</string>
+    <string name="account_delete">Delete Account</string>
+
+</resources>

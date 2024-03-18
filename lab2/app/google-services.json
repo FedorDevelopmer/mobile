@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "881699533483",
+    "firebase_url": "https://application-dsfmp-default-rtdb.firebaseio.com",
+    "project_id": "application-dsfmp",
+    "storage_bucket": "application-dsfmp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:881699533483:android:8170327a22e00e3f9b3dee",
+        "android_client_info": {
+          "package_name": "by.bsuir.mobile.lab2"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBtyfxyb4hLv_UoNm6FrAIh8aao67qFrt8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
