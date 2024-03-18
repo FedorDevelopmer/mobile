@@ -10,23 +10,36 @@ import SwiftUI
 import Firebase
 
 struct SignUpView: View {
-    @State private var login: String = ""
+    @State private var email: String = ""
     @State private var password: String = ""
     @EnvironmentObject var appPage: PageState
     @EnvironmentObject var auth: AuthState
     var body: some View {
-        Text("Sign Up").padding()
-        TextField("Enter email",text: $login).padding()
-        TextField("Enter password",text: $password).padding()
+        Text("Sign Up").padding().onAppear{
+            if let user = Auth.auth().currentUser {
+                auth.authorized  = true
+                appPage.page = PageEnum.ITEMS
+            }
+        }
+        TextField("Enter email",text: $email).padding().overlay(
+            RoundedRectangle(cornerRadius: 16)
+                .stroke(lineWidth: 1)
+        ).padding()
+        SecureField("Enter password",text: $password).padding().overlay(
+            RoundedRectangle(cornerRadius: 16)
+                .stroke(lineWidth: 1)
+        ).padding()
         Button (
         action: {
-        InAppAuthorization().signUp(email:login,password:password)
+        InAppAuthorization().signUp(email:email,password:password)
         auth.authorized = true
         appPage.page = PageEnum.ITEMS
-        },label: { Text("Sign Up")})
+        },label: { Text("Sign Up").foregroundColor(.white)}).padding(EdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8))
+            .background(Color(.blue))
+            .clipShape(Capsule())
     }
-    public init(login:String,password:String){
+    public init(email:String,password:String){
         self.password = password
-        self.login = login
+        self.email = email
     }
 }
